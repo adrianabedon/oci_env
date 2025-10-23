@@ -38,6 +38,7 @@ services:
       - "oci_pulp:/var/lib/pulp"
       - "oci_redis_data:/data"
       - "oci_pg_data:/var/lib/pgsql"
+      - "/etc/debsig/:/etc/debsig:ro"
 
 volumes:
   oci_pulp:

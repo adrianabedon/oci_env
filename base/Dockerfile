@@ -5,6 +5,7 @@ FROM $BASE_IMAGE
 ENV S6_KEEP_ENV=1
 
 COPY dev_requirements.txt /dev_requirements.txt
+COPY debsigs-0.2.2-2.noarch.rpm /debsigs-0.2.2-2.noarch.rpm
 
 COPY switch_python /usr/bin/switch_python
 ARG PYTHON_VERSION=3.11
@@ -13,6 +14,7 @@ RUN switch_python "$PYTHON_VERSION"
 RUN pip3 install -r dev_requirements.txt
 
 RUN dnf -y install gettext
+RUN dnf -y install /debsigs-0.2.2-2.noarch.rpm
 
 COPY settings.py /etc/pulp/settings.py
 COPY s6-rc.d/oci-env-prepare/ /etc/s6-overlay/s6-rc.d/oci-env-prepare/
